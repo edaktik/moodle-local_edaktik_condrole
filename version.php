@@ -30,6 +30,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_edaktik_condrole';
 $plugin->release = '0.1.0';
-$plugin->version = 2019091000;
+$plugin->version = 2019091001;
 $plugin->requires = 2018120300;
 $plugin->maturity = MATURITY_ALPHA;

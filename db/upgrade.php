@@ -49,5 +49,52 @@ function xmldb_local_edaktik_condrole_upgrade($oldversion) {
     // Documentation for the XMLDB Editor can be found at:
     // https://docs.moodle.org/dev/XMLDB_editor
 
+    if ($oldversion < 2019091001) {
+
+      // Define table local_edaktik_condrole_rcont to be created.
+      $table = new xmldb_table('local_edaktik_condrole_rcont');
+
+      // Adding fields to table local_edaktik_condrole_rcont.
+      $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+      $table->add_field('ruleid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+      $table->add_field('contextid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+
+      // Adding keys to table local_edaktik_condrole_rcont.
+      $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+      // Conditionally launch create table for local_edaktik_condrole_rcont.
+      if (!$dbman->table_exists($table)) {
+          $dbman->create_table($table);
+      }
+
+      // Define table local_edaktik_condrole_rules to be created.
+      $table = new xmldb_table('local_edaktik_condrole_rules');
+
+      // Adding fields to table local_edaktik_condrole_rules.
+      $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+      $table->add_field('title', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+      $table->add_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null);
+      $table->add_field('active', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '0');
+      $table->add_field('sortorder', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+      $table->add_field('roleid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+      $table->add_field('conditiontype', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+      $table->add_field('conditionid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+      $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+      $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+      $table->add_field('modifierid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+
+      // Adding keys to table local_edaktik_condrole_rules.
+      $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+      // Conditionally launch create table for local_edaktik_condrole_rules.
+      if (!$dbman->table_exists($table)) {
+          $dbman->create_table($table);
+      }
+
+      // Edaktik_condrole savepoint reached.
+      upgrade_plugin_savepoint(true, 2019091001, 'local', 'edaktik_condrole');
+    }
+
+
     return true;
 }
