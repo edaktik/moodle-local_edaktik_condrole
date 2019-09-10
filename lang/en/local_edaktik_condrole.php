@@ -49,4 +49,5 @@ $string['context']='Context';
 $string['context_help']='Select the desired context';
 $string['role']='Role';
 $string['role_help']='Select the Moodle role to be assigned';
-
+$string['subplugintype_condrole_conditiontype'] = 'Condition type';
+$string['subplugintype_condrole_conditiontype_plural'] = 'Condition types';
