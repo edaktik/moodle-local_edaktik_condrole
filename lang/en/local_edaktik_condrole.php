@@ -19,11 +19,11 @@
  *
  * @package     local_edaktik_condrole
  * @category    string
- * @copyright   2019 [TMPTOREPLACE]
- * @author      Ivan Gula <ivan.gula.wien@gmail.com>
- * @author      Philipp Hager <philipp.hager@edaktik.at>
+ * @copyright   2019 eDaktik.at
  * @author      Andreas Hruska <andreas.hruska@edaktik.at>
+ * @author      Philipp Hager <philipp.hager@edaktik.at>
  * @author      Thomas Schallert <thomas.schallert@fhnw.ch>
+ * @author      Ivan Gula <ivan.gula.wien@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -36,3 +36,4 @@ $string['edaktik_condrole:set_status'] = 'Set condition status (active/inactive)
 $string['edaktik_condrole:view'] = 'View conditions';
 $string['edaktik_condrole:view_reports'] = 'View Conditional Role Assignment Reports';
 $string['pluginname'] = 'Conditional Role Assignment';
+$string['pluginname_desc'] = 'Conditional Role Assignment is a Moodle local plugin to provide automatic rule based assignment of roles to context (e.g. coursecategory) by flexible criteria e.g. userprofile field patterns.';

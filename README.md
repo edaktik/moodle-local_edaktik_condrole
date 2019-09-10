@@ -1,6 +1,6 @@
 # Conditional Role Assignment #
 
-Conditional Role Assignment  is a Moodle local plugin to provide automatic rule based assignment of roles to context (e.g. coursecategory) by flexible criteria e.g. userprofile field patterns.
+Conditional Role Assignment is a Moodle local plugin to provide automatic rule based assignment of roles to context (e.g. coursecategory) by flexible criteria e.g. userprofile field patterns.
 
 ## Application example 1
 You want to assign all users with userprofilefield "department" holding the value "elearning" the Moodle role "manager" at course category level "compliance trainings" 
@@ -50,7 +50,7 @@ The plugin is designed for Moodle 3.5+
 
 ## License ##
 
-Copyright   (C) 2019 eDaktik.at
+Copyright 2019 eDaktik.at
  
 Authors:    Andreas Hruska <andreas.hruska@edaktik.at>; Philipp Hager <philipp.hager@edaktik.at>; Thomas Schallert <thomas.schallert@fhnw.ch>; Ivan Gula <ivan.gula.wien@gmail.com>
 
