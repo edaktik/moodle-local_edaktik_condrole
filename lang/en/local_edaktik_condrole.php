@@ -37,3 +37,16 @@ $string['edaktik_condrole:view'] = 'View conditions';
 $string['edaktik_condrole:view_reports'] = 'View Conditional Role Assignment Reports';
 $string['pluginname'] = 'Conditional Role Assignment';
 $string['pluginname_desc'] = 'Conditional Role Assignment is a Moodle local plugin to provide automatic rule based assignment of roles to context (e.g. coursecategory) by flexible criteria e.g. userprofile field patterns.';
+$string['title'] = 'Title';
+$string['title_help'] = 'Title - Help';
+$string['description'] = 'Description';
+$string['description_help'] = 'Description - Help';
+$string['active']='Active';
+$string['active_help']='Active - Help';
+$string['contexttype']='Context type';
+$string['contexttype_help']='Context type - Help';
+$string['context']='Context';
+$string['context_help']='Context - Help';
+$string['role']='Role';
+$string['role_help']='Role - Help';
+
