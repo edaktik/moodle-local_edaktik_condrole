@@ -33,6 +33,10 @@ require_once("$CFG->libdir/tablelib.php");
  
 use  table_sql;
 use  html_writer;
+use confirm_action;
+use moodle_url;
+use pix_icon;
+use action_link;
 
 class rulestable extends table_sql {
 	
@@ -155,7 +159,32 @@ class rulestable extends table_sql {
      */
     protected function col_actions($row) {
 		//$row->id;
-        return "edit | delete | up | down ";
+        //return "edit | delete | up | down ";
+		global $OUTPUT;
+		
+
+        // We could alternatively use an action_menu, but we have no secondary actions here!
+
+        $confirm = new confirm_action(get_string('areyousure'), null, get_string('delete'), get_string('cancel'));
+
+        $actions = [];
+		
+        
+		$url = new moodle_url('/local/edaktik_condrole/edit.php');
+		$url->params(array('delete' => $row->id));
+		$icon = new pix_icon('t/delete', get_string('delete'));
+		$delete = new action_link($url, '', $confirm, null, $icon);
+		$actions[] = $OUTPUT->render($delete);
+        
+
+        $url = new moodle_url('/local/edaktik_condrole/edit.php');
+        $url->params(['update' => $row->id]);
+        $icon = new pix_icon('t/edit', get_string('edit'));
+        $edit = new action_link($url, '', null, null, $icon);
+        $actions[] = $OUTPUT->render($edit);
+
+        return implode('', $actions);
+    
     }
 
 	/**

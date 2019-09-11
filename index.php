@@ -38,8 +38,8 @@ echo $OUTPUT->header();
 
 //global $OUTPUTHEADING;
 echo "<div><p>".get_string('pluginname_desc', 'local_edaktik_condrole')."</p></div>";
-
-echo "<span style='background-color:#def2f8; padding: 4px 6px; border-radius: 4px'><a href='#'>".get_string('rule_add', 'local_edaktik_condrole')."</a></span>";
+$addNewRuleUrl = new moodle_url('/local/edaktik_condrole/edit.php');
+echo "<span style='background-color:#def2f8; padding: 4px 6px; border-radius: 4px'><a href='".$addNewRuleUrl."'>".get_string('rule_add', 'local_edaktik_condrole')."</a></span>";
 
 $table = new \local_edaktik_condrole\rulestable();
 $table->out(50,false);
