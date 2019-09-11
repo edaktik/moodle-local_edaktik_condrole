@@ -22,7 +22,7 @@
  * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace condrole_conditiontype_profilefield;
+namespace condroletype_profilefield;
 
 use local_edaktik_condrole\condition;
 use dml_exception;
@@ -56,6 +56,8 @@ class profilefield implements condition {
     const REGEX = 6;
     // TODO these operators can maybe extended to others too, like special string comparison, dates, etc.
 
+    /** @var int id is set to the DB id, as soon as the condition is present there! */
+    protected $id = 0;
     /** @var string the userfield to compare against */
     protected $fieldname = '';
     /** @var int the comparison operator to be used */
@@ -82,12 +84,15 @@ class profilefield implements condition {
      * @return profilefield
      * @throws dml_exception
      */
-    public static function get_from_db(int $id) {
+    public static function get_from_db(int $id): condition {
         global $DB;
 
         $data = $DB->get_record('condroletype_profilefield', ['id' => $id]);
 
-        return new self($data->fieldname, $data->operator, $data->pattern);
+        $cond = new self($data->fieldname, $data->operator, $data->pattern);
+        $cond->id = $id;
+
+        return $cond;
     }
 
     /**
@@ -175,5 +180,37 @@ class profilefield implements condition {
      */
     public function inform_subscribers() {
         // TODO: Implement inform_subscribers() method.
+    }
+
+    /**
+     * Save the condition and return it's ID!
+     *
+     * @return int
+     * @throws dml_exception
+     */
+    public function save(): int {
+        global $DB, $USER;
+        if (!empty($this->id)) {
+            $DB->update_record('condroletype_profilefield', (object)[
+                'id' => $this->id,
+                'fieldname' => $this->fieldname,
+                'operator' => $this->operator,
+                'pattern' => $this->pattern,
+                'timemodified' => time(),
+                'usermodified' => $USER->id
+            ]);
+        } else {
+            $time = time();
+            $this->id = $DB->insert_record('condroletype_profilefield', (object)[
+                'fieldname' => $this->fieldname,
+                'operator' => $this->operator,
+                'pattern' => $this->pattern,
+                'timecreated' => $time,
+                'timemodified' => $time,
+                'usermodified' => $USER->id
+            ]);
+        }
+
+        return $this->id;
     }
 }

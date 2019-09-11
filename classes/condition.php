@@ -63,4 +63,19 @@ interface condition
      * Sends an {[[TODO define event]]} event to inform all interested plugins about the result?
      */
     public function inform_subscribers();
+
+    /**
+     * Return the condition
+     *
+     * @param int $id the condition ID to return the object for.
+     * @return condition
+     */
+    public static function get_from_db(int $id): self;
+
+    /**
+     * Save the condition to the DB and return it's database id!
+     *
+     * @return int
+     */
+    public function save(): int;
 }
