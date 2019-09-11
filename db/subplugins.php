@@ -25,5 +25,5 @@
 defined('MOODLE_INTERNAL') || die;
 
 $subplugins = array(
-    'condrole_conditiontype' => 'local/edaktik_condrole/conditiontypes',
+    'condroletype' => 'local/edaktik_condrole/conditiontypes',
 );

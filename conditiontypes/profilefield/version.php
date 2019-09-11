@@ -28,7 +28,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'condrole_conditiontype_profilefield';
+$plugin->component = 'condroletype_profilefield';
 $plugin->release = '0.1.0';
 $plugin->version = 2019091001;
 $plugin->requires = 2018051700;

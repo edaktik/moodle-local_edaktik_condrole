@@ -33,14 +33,14 @@ use moodle_exception;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class condrole_conditiontype
+ * Class condroletype
  *
  * @package local_edaktik_condrole
  * @copyright (c) 2019 eDaktik GmbH
  * @author    Philipp Hager <philipp.hager@edaktik.at>
  * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class condrole_conditiontype extends base {
+class condroletype extends base {
     /**
      * Finds all enabled plugins, the result may include missing plugins.
      * @return array|null of enabled plugins $pluginname=>$pluginname, null means unknown
