@@ -13,15 +13,22 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Plugin upgrade helper functions are defined here.
+ * events.php
  *
- * @package     local_edaktik_condrole
- * @category    upgrade
- * @copyright   2019 [TMPTOREPLACE]
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package local_edaktik_condrole
+ * @copyright (c) 2019 eDaktik GmbH
+ * @author    Philipp Hager <philipp.hager@edaktik.at>
+ * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
+$observers = [
+    [
+        'eventname' => '\local_edaktik_condrole\event\condition_updated',
+        'callback' => '\local_edaktik_condrole\rule::condition_updated',
+        'includefile' => '/local/edaktik_condrole/classes/rule.php',
+        'priority' => 0,
+        'internal' => true,
+    ],
+];

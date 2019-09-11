@@ -30,6 +30,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'condroletype_profilefield';
 $plugin->release = '0.1.0';
-$plugin->version = 2019091001;
+$plugin->version = 2019091003;
 $plugin->requires = 2018051700;
 $plugin->maturity = MATURITY_ALPHA;
