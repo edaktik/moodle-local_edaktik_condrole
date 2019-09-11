@@ -154,7 +154,8 @@ class rulestable extends table_sql {
      * @throws moodle_exception
      */
     protected function col_actions($row) {
-        return "edit/delete/up/down ".$row->id;
+		//$row->id;
+        return "edit | delete | up | down ";
     }
 
 	/**

@@ -51,3 +51,4 @@ $string['role']='Role';
 $string['role_help']='Select the Moodle role to be assigned';
 $string['subplugintype_condrole_conditiontype'] = 'Condition type';
 $string['subplugintype_condrole_conditiontype_plural'] = 'Condition types';
+$string['rule_add'] = 'Add new rule';
