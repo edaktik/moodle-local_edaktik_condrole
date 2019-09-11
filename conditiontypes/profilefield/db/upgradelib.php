@@ -15,21 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version and other meta-data are defined here.
+ * Plugin upgrade helper functions are defined here.
  *
  * @package     local_edaktik_condrole
+ * @category    upgrade
  * @copyright   2019 [TMPTOREPLACE]
- * @author      Ivan Gula <ivan.gula.wien@gmail.com>
- * @author      Philipp Hager <philipp.hager@edaktik.at>
- * @author      Andreas Hruska <andreas.hruska@edaktik.at>
- * @author      Thomas Schallert <thomas.schallert@fhnw.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'condrole_conditiontype_profilefield';
-$plugin->release = '0.1.0';
-$plugin->version = 2019091001;
-$plugin->requires = 2018051700;
-$plugin->maturity = MATURITY_ALPHA;
+/**
+ * Helper function used by the upgrade.php file.
+ */
+function local_edaktik_condrole_helper_function() {
+    global $DB;
+
+    // Please note that you should always be performing any task using raw (low
+    // level) database access exclusively, avoiding any use of the Moodle APIs.
+    //
+    // For more information please read the available Moodle documentation:
+    // https://docs.moodle.org/dev/Upgrade_API
+}
