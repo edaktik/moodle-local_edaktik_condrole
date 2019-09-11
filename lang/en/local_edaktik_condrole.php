@@ -19,7 +19,7 @@
  *
  * @package     local_edaktik_condrole
  * @category    string
- * @copyright   2019 eDaktik.at
+ * @copyright   (c) 2019 eDaktik GmbH
  * @author      Andreas Hruska <andreas.hruska@edaktik.at>
  * @author      Philipp Hager <philipp.hager@edaktik.at>
  * @author      Thomas Schallert <thomas.schallert@fhnw.ch>

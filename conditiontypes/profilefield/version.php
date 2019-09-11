@@ -18,11 +18,11 @@
  * Plugin version and other meta-data are defined here.
  *
  * @package     local_edaktik_condrole
- * @copyright   2019 [TMPTOREPLACE]
- * @author      Ivan Gula <ivan.gula.wien@gmail.com>
- * @author      Philipp Hager <philipp.hager@edaktik.at>
+ * @copyright   (c) 2019 eDaktik GmbH
  * @author      Andreas Hruska <andreas.hruska@edaktik.at>
+ * @author      Philipp Hager <philipp.hager@edaktik.at>
  * @author      Thomas Schallert <thomas.schallert@fhnw.ch>
+ * @author      Ivan Gula <ivan.gula.wien@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
