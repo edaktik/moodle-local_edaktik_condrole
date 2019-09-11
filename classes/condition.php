@@ -36,5 +36,31 @@ defined('MOODLE_INTERNAL') || die();
  */
 interface condition
 {
-    // TODO define all functions they must implement!
+    /**
+     * Used to return the settingsform for this condition, used for getting fragment in local_edaktik_condrole.
+     *  TODO!
+     * @return mixed
+     */
+    public function get_settings_form();
+
+    /**
+     * Return if a user meets this certain condition.
+     *
+     * @param int $userid The user's database id
+     * @return bool the calculated condition value for this user
+     */
+    public function result(int $userid): bool;
+
+    /**
+     * Return if multiple users meet this certain condition.
+     *
+     * @param int[] $userids The user's database id
+     * @return bool[] the calculated condition value for this user
+     */
+    public function results(array $userids): array;
+
+    /**
+     * Sends an {[[TODO define event]]} event to inform all interested plugins about the result?
+     */
+    public function inform_subscribers();
 }

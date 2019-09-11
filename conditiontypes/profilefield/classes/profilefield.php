@@ -25,6 +25,9 @@
 namespace condrole_conditiontype_profilefield;
 
 use local_edaktik_condrole\condition;
+use dml_exception;
+use invalid_parameter_exception;
+use coding_exception;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -37,5 +40,140 @@ defined('MOODLE_INTERNAL') || die();
  * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class profilefield implements condition {
+    /** @var int fieldname doesn't equal the pattern (for text LIKE is used) */
+    const NOT_EQUALS = 0;
+    /** @var int fieldname equals pattern (for text LIKE is used) */
+    const EQUALS = 1;
+    /** @var int type strict negative comparison */
+    const STRICT_NOT_EQUALS = 2;
+    /** @var int type strict comparison */
+    const STRICT_EQUALS = 3;
+    /** @var int type strict comparison */
+    const GREATER_THAN = 4;
+    /** @var int type strict negative comparison */
+    const SMALLER_THAN = 5;
+    /** @var int match against a regex pattern using preg_match() */
+    const REGEX = 6;
+    // TODO these operators can maybe extended to others too, like special string comparison, dates, etc.
 
+    /** @var string the userfield to compare against */
+    protected $fieldname = '';
+    /** @var int the comparison operator to be used */
+    protected $operator = self::EQUALS;
+    /** @var mixed the pattern to check against, can be of any type, but will often be a string due to database */
+    protected $pattern = '';
+
+    /**
+     * profilefield constructor.
+     * @param string $fieldname
+     * @param int $operator
+     * @param string $pattern
+     */
+    public function __construct(string $fieldname, int $operator, string $pattern) {
+        $this->fieldname = $fieldname;
+        $this->operator = $operator;
+        $this->pattern = $pattern;
+    }
+
+    /**
+     * Get the profilefield instance right from the DB id!
+     *
+     * @param int $id
+     * @return profilefield
+     * @throws dml_exception
+     */
+    public static function get_from_db(int $id) {
+        global $DB;
+
+        $data = $DB->get_record('condroletype_profilefield', ['id' => $id]);
+
+        return new self($data->fieldname, $data->operator, $data->pattern);
+    }
+
+    /**
+     * Return if a user meets this certain condition.
+     *
+     * @param int $userid The user's database id
+     * @return bool the calculated condition value for this user
+     * @throws dml_exception
+     * @throws invalid_parameter_exception
+     */
+    public function result(int $userid): bool {
+        global $DB;
+
+        $userfield = $DB->get_field('user', $this->fieldname, ['id' => $userid]);
+
+        return $this->comparison($userfield);
+    }
+
+    /**
+     * Return if multiple users meet this certain condition.
+     *
+     * @param int[] $userids The user's database id
+     * @return bool[] the calculated condition value for this user
+     * @throws dml_exception
+     * @throws invalid_parameter_exception
+     * @throws coding_exception
+     */
+    public function results(array $userids): array {
+        global $DB;
+
+        if (empty($userids)) {
+            return [];
+        }
+
+        list($sql, $params) = $DB->get_in_or_equal($userids);
+
+        $userfields = $DB->get_records_select_menu('user', 'id '.$sql, $params, '', 'id, '.$this->fieldname);
+
+        foreach ($userfields as $id => $userfield) {
+            $return[$id] = $this->comparison($userfield);
+        }
+
+        return $return;
+    }
+
+    /**
+     * @param $userfield
+     * @return bool|false|int
+     * @throws invalid_parameter_exception
+     */
+    protected function comparison($userfield) {
+        switch ($this->operator) {
+            case static::EQUALS:
+                return $userfield == $this->pattern;
+            case static::NOT_EQUALS:
+                return $userfield != $this->pattern;
+            case static::STRICT_EQUALS:
+                return $userfield === $this->pattern;
+            case static::STRICT_NOT_EQUALS:
+                return $userfield !== $this->pattern;
+            case static::GREATER_THAN:
+                return $userfield > $this->pattern;
+            case static::SMALLER_THAN:
+                return $userfield < $this->pattern;
+            case static::REGEX:
+                return preg_match($this->pattern, $userfield);
+        }
+
+        throw new invalid_parameter_exception('Wrong comparison type!');
+    }
+
+    /**
+     * Returns the settings form used by a get fragment call!
+     *
+     * TODO!
+     *
+     * @return string
+     */
+    public function get_settings_form(): string {
+        return '';
+    }
+
+    /**
+     * TODO inform subscribers via event!
+     */
+    public function inform_subscribers() {
+        // TODO: Implement inform_subscribers() method.
+    }
 }
